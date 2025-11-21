@@ -13,6 +13,9 @@
       "path": "./packages/button"
     },
     {
+      "path": "./packages/cascader"
+    },
+    {
       "path": "./packages/utils"
     },
     {

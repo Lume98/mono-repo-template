@@ -1,0 +1,25 @@
+{
+  "name": "storybook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache 2.0",
+  "packageManager": "pnpm@10.13.1",
+  "devDependencies": {
+    "@storybook/addon-docs": "^8.6.14",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/react": "^8.6.14",
+    "@storybook/react-vite": "^8.6.14",
+    "@storybook/theming": "^8.6.14",
+    "storybook": "^8.6.14"
+  },
+  "dependencies": {
+    "@lume-ui/cascader": "workspace:*"
+  }
+}
