@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:docs": "pnpm --filter docs dev",
+    "dev": "pnpm -r dev",
     "prettier": "pnpm -r prettier",
     "prettier:check": "pnpm -r prettier:check",
     "test:all": "pnpm -r test"

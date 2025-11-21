@@ -1,14 +1,9 @@
 {
-    "extends": "../../tsconfig.json",
-    "compilerOptions": {
-        "composite": false,
-        "incremental": false
-    },
-    "include": [
-        "src",
-        "../../types/**/*"
-    ],
-    "exclude": [
-        "dist"
-    ]
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "incremental": true
+  },
+  "include": ["src"],
+  "exclude": ["dist"]
 }

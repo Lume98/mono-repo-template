@@ -1,15 +1,9 @@
 {
-    "extends": "../tsconfig.json",
-    "compilerOptions": {
-        "composite": false,
-        "incremental": false
-    },
-    "include": [
-        "stories",
-        ".storybook"
-    ],
-    "exclude": [
-        "dist",
-        "node_modules"
-    ]
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "incremental": true
+  },
+  "include": ["stories", ".storybook"],
+  "exclude": ["dist", "node_modules"]
 }
