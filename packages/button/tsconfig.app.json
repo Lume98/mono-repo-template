@@ -1,0 +1,34 @@
+{
+  // Button 包的应用代码配置
+  // 继承根配置，并添加应用代码特定的配置（如测试、开发工具等）
+
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    // 构建信息文件位置
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+
+    // 应用代码不需要生成声明文件，由 Vite 处理
+    "noEmit": true,
+
+    // 允许导入 TypeScript 扩展名（.ts, .tsx），配合 noEmit 使用
+    "allowImportingTsExtensions": true,
+
+    // 应用代码特定的类型声明
+    "types": ["vite/client", "@testing-library/jest-dom"],
+
+    // 代码质量检查选项
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // 覆盖根配置中的声明文件相关选项（应用代码不需要）
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": true,
+
+    // 覆盖根配置中的 composite（应用代码不需要）
+    "composite": false
+  },
+  "include": ["src"]
+}

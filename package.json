@@ -1,12 +1,14 @@
 {
   "name": "mono-repo",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:docs": "pnpm --filter docs dev",
-    "prettier": "prettier src --write",
+    "prettier": "pnpm -r prettier",
+    "prettier:check": "pnpm -r prettier:check",
     "test:all": "pnpm -r test"
   },
   "keywords": [],

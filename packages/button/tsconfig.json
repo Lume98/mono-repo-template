@@ -1,0 +1,23 @@
+{
+  // Button 包的 TypeScript 配置
+  // 继承根配置，并添加包特定的配置
+
+  "extends": "../../tsconfig.json",
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  "compilerOptions": {
+    // 包特定的类型声明
+    "types": ["@testing-library/jest-dom", "vitest/globals"],
+
+    // 启用复合模式，支持被其他包引用
+    "composite": true,
+    "incremental": true
+  }
+}

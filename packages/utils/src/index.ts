@@ -1,3 +1,3 @@
-import { add } from "./calc";
+import { add } from "./calc.js";
 
 export { add };

@@ -1,44 +1,102 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
+  // Monorepo 根目录 TypeScript 配置
+  // 此配置作为所有子包的基础配置，使用 TypeScript Project References 管理包之间的依赖关系
+  // 根配置不包含任何文件，只作为基础配置
+  "files": [],
+  // 引用所有子包的 TypeScript 项目
+  // 使用 Project References 可以实现：
+  // 1. 增量编译，只编译变更的包
+  // 2. 类型检查时正确解析包之间的依赖关系
+  // 3. IDE 能够正确识别跨包的类型引用
+  "references": [
+    {
+      "path": "./packages/button"
+    },
+    {
+      "path": "./packages/utils"
+    },
+    {
+      "path": "./docs"
+    }
+  ],
   "compilerOptions": {
-    // File Layout
-    // "rootDir": "./src",
-    // "outDir": "./dist",
-
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
-    "target": "esnext",
+    // ============================================
+    // 环境设置
+    // ============================================
+    // 模块系统：使用 ESNext 模块格式
+    // 适合组件库开发，最终由打包工具（如 Vite、Rollup）处理
+    "module": "ESNext",
+    // 模块解析策略：使用 bundler 模式
+    // 适合组件库，允许：
+    // 1. 导入 TypeScript 文件时不需要扩展名（如 "./Button" 而不是 "./Button.js"）
+    // 2. 支持现代打包工具的特性
+    // 注意：如果子包需要生成声明文件，不要设置 "allowImportingTsExtensions"
+    // 该选项需要配合 "noEmit": true 使用，应在子包的 tsconfig 中配置
+    "moduleResolution": "bundler",
+    // 目标 ECMAScript 版本：使用 ES2022（稳定且现代）
+    // 组件库通常使用较新的 ES 版本，由打包工具处理兼容性
+    "target": "ES2022",
+    // 类字段定义方式：使用标准的 ECMAScript 类字段语义
+    "useDefineForClassFields": true,
+    // 类型声明：空数组表示不自动包含任何 @types 包
+    // 各子包可以根据需要在自己的 tsconfig 中添加类型
     "types": [],
-    // For nodejs:
-    // "lib": ["esnext"],
-    // "types": ["node"],
-    // and npm install -D @types/node
-
-    // Other Outputs
+    // 库文件：包含 ES2022 和 DOM API
+    // 组件库通常需要 DOM 类型支持（如 React 组件库）
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    // ============================================
+    // 输出配置
+    // ============================================
+    // 生成 source map 文件，用于调试
     "sourceMap": true,
+    // 生成 .d.ts 声明文件（组件库必需）
     "declaration": true,
+    // 为声明文件生成 source map，便于调试类型定义
     "declarationMap": true,
-
-    // Stricter Typechecking Options
+    // 注意：根配置不需要 composite
+    // composite 应该在子包的 tsconfig.json 中设置（如果子包需要被其他包引用）
+    // ============================================
+    // 更严格的类型检查选项
+    // ============================================
+    // 索引访问时返回 undefined 类型，要求显式检查
+    // 例如：arr[0] 的类型是 T | undefined，而不是 T
     "noUncheckedIndexedAccess": true,
+    // 精确的可选属性类型，区分 undefined 和缺失的属性
+    // 例如：{ prop?: string } 和 { prop: string | undefined } 是不同的
     "exactOptionalPropertyTypes": true,
-
-    // Style Options
-    // "noImplicitReturns": true,
-    // "noImplicitOverride": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noPropertyAccessFromIndexSignature": true,
-
-    // Recommended Options
+    // ============================================
+    // 代码风格选项（已注释，可根据需要启用）
+    // ============================================
+    "noImplicitReturns": true, // 函数必须有显式返回值
+    "noImplicitOverride": true, // 重写方法必须使用 override 关键字
+    "noUnusedLocals": true, // 禁止未使用的局部变量
+    "noUnusedParameters": true, // 禁止未使用的函数参数
+    // ============================================
+    // 组件库推荐配置选项
+    // ============================================
+    // 启用所有严格类型检查选项
     "strict": true,
+    // JSX 编译模式：使用新的 JSX 转换（React 17+）
+    // 不需要在每个文件中导入 React
     "jsx": "react-jsx",
+    // 保持导入/导出语法不变，不进行转换
+    // 确保 ESM 语法正确，由打包工具处理最终输出
     "verbatimModuleSyntax": true,
+    // 确保每个文件都可以独立编译，不依赖其他文件的类型信息
+    // 提高编译性能和工具支持，对组件库很重要
     "isolatedModules": true,
+    // 禁止未检查的副作用导入
+    // 要求显式标记有副作用的导入（如 CSS 文件）
     "noUncheckedSideEffectImports": true,
+    // 强制将所有文件视为模块
+    // 即使文件没有 import/export 语句
     "moduleDetection": "force",
-    "skipLibCheck": true,
+    // 跳过类型声明文件的类型检查
+    // 加快编译速度，但可能隐藏依赖包的类型错误
+    "skipLibCheck": true
   }
 }
