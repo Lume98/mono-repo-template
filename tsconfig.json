@@ -3,6 +3,10 @@
   // 此配置作为所有子包的基础配置，使用 TypeScript Project References 管理包之间的依赖关系
   // 根配置不包含任何文件，只作为基础配置
   "files": [],
+  // 包含全局类型声明文件（如 CSS 模块类型）
+  "include": [
+    "types/**/*"
+  ],
   // 引用所有子包的 TypeScript 项目
   // 使用 Project References 可以实现：
   // 1. 增量编译，只编译变更的包
@@ -10,16 +14,13 @@
   // 3. IDE 能够正确识别跨包的类型引用
   "references": [
     {
-      "path": "./packages/button"
-    },
-    {
       "path": "./packages/cascader"
     },
     {
       "path": "./packages/utils"
     },
     {
-      "path": "./docs"
+      "path": "./storybook"
     }
   ],
   "compilerOptions": {
@@ -44,6 +45,9 @@
     // 类型声明：空数组表示不自动包含任何 @types 包
     // 各子包可以根据需要在自己的 tsconfig 中添加类型
     "types": [],
+    // 类型根目录：指定全局类型声明文件的位置
+    // 包含项目自定义的全局类型（如 CSS 模块类型）
+    "typeRoots": ["./node_modules/@types", "./types"],
     // 库文件：包含 ES2022 和 DOM API
     // 组件库通常需要 DOM 类型支持（如 React 组件库）
     "lib": [
